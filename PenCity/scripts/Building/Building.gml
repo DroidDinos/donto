@@ -14,5 +14,6 @@ function Building(_name, _cost, _type, _sprite = noone, _radius = 0, _damage = 0
 global.EmptyBuilding = Building("Üres",0,"Empty")
 
 global.Buildings = {
-	"kicsi_tombhaz" : Building("Kicsi Tömbház", 10, "Residential", spr_Tomb1)
+	"kicsi_tombhaz" : Building("Kicsi Tömbház", 10, "Residential", spr_Tomb1),
+	"kozep_tombhaz" : Building("Kicsi Tömbház", 10, "Residential", spr_Tomb2)
 }

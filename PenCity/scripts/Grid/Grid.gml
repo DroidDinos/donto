@@ -1,12 +1,12 @@
-global.Grid = []
+var dsw = 11
+var dsh = 11
+global.Grid = ds_grid_create(dsw,dsh)
 
-for(i = 0; 30>i; i++){
-	var sor = []
-	for(j = 0; 30 >j; j++){
-		var oszlop = global.EmptyBuilding
-		array_push(sor,oszlop)
+for(var i = 0; dsw > i; i++){
+	for(var j = 0; dsh > j; j++){
+		var build = global.EmptyBuilding
+		ds_grid_set(global.Grid,i,j,build)
 	}
-	array_push(global.Grid, sor)
 }
 
 function add_building(_x,_y,_building){
@@ -50,5 +50,13 @@ function decrease_damage_building(_x,_y){
 			break;
 		default:
 			break;
+	}
+}
+
+function generateGrid() {
+	for (var i = 0; i < ds_grid_width(global.Grid); i++) {
+		for (var j = 0; j < ds_grid_height(global.Grid); j++) {
+			instance_create_layer(1312 + i*128 - j*128, j*64 + i*64 + room_height/2 - ds_grid_height(global.Grid)*128/2, layer_get_id("Tiles"),obj_Tile)
+		}
 	}
 }

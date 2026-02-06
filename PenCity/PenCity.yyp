@@ -26,6 +26,7 @@
   "name":"PenCity",
   "resources":[
     {"id":{"name":"obj_Camera","path":"objects/obj_Camera/obj_Camera.yy",},},
+    {"id":{"name":"obj_tester","path":"objects/obj_tester/obj_tester.yy",},},
     {"id":{"name":"obj_Tile","path":"objects/obj_Tile/obj_Tile.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"id":{"name":"Building","path":"scripts/Building/Building.yy",},},

@@ -12,7 +12,8 @@ for(var i = 0; dsw > i; i++){
 function add_building(_x,_y,_building){
 	if(ds_grid_get(global.Grid,_x,_y).name == global.EmptyBuilding.name){
 		var tempTile = ds_grid_get(global.Grid,_x,_y)
-		ds_grid_set(global.Grid,_x,_y,_building)
+		var tempBuilding = _building
+		ds_grid_set(global.Grid,_x,_y,tempBuilding)
 		ds_grid_get(global.Grid,_x,_y).pollution = tempTile.pollution
 		ds_grid_get(global.Grid,_x,_y).damage = tempTile.damage
 	}
@@ -22,18 +23,46 @@ function add_building(_x,_y,_building){
 	
 	switch (_building.type){
 		case "Factory":
-			for(i = _building.radius; _building.radius>i;i++){
-				for(j = _building.radius; _building.radius>j;j++){
+			for(i = -(_building.radius); _building.radius>i;i++){
+				for(j = -(_building.radius); _building.radius>j;j++){
 					ds_grid_get(global.Grid,_x+i,_y+j).pollution += _building.damage
 				}
 			}
 			break;
 		case "Hospital":
 			break;
+		case "Residential":
+			global.Population += _building.citizens
+			break;
 		default:
 			break;
 	}
 }
+
+function remove_building(_x,_y){
+	switch (ds_grid_get(global.Grid,_x,_y).type){
+		case "Factory":
+			for(i = -ds_grid_get(global.Grid,_x,_y).radius; ds_grid_get(global.Grid,_x,_y).radius>i;i++){
+				for(j = -ds_grid_get(global.Grid,_x,_y).radius; ds_grid_get(global.Grid,_x,_y).radius>j;j++){
+					ds_grid_get(global.Grid,_x+i,_y+j).pollution -= ds_grid_get(global.Grid,_x,_y).damage
+				}
+			}
+			for(i = ds_grid_get(global.Grid,_x,_y).damage; i>0;i--){
+				decrease_damage_building(_x,_y)
+			}
+			break;
+		case "Hospital":
+			break;
+		case "Residential":
+			global.Population -= ds_grid_get(global.Grid,_x,_y).citizens
+			break;
+		default:
+			break;
+	}
+	
+	ds_grid_set(global.Grid,_x,_y,global.EmptyBuilding)
+}
+
 
 function decrease_damage_building(_x,_y){
 	ds_grid_get(global.Grid,_x,_y).damage = clamp(ds_grid_get(global.Grid,_x,_y).damage-1,0,999)

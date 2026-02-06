@@ -9,6 +9,46 @@ for(var i = 0; dsw > i; i++){
 	}
 }
 
+function calculatePollution(){
+	for(i = 0; ds_grid_width(global.Grid) > i;i++){
+		for (j = 0; ds_grid_height(global.Grid) > j; j++){
+			if(ds_grid_get(global.Grid,i,j).type == "Factory"){
+				for(i2 = -ds_grid_get(global.Grid,i,j).radius ; ds_grid_get(global.Grid,i,j).radius >i2;i2++){
+					for(j2 = -ds_grid_get(global.Grid,i,j).radius ; ds_grid_get(global.Grid,i,j).radius >j2;j2++){
+						try{
+							var tempTile = ds_grid_get(global.Grid,i+i2,j+j2);
+							tempTile.pollution += ds_grid_get(global.Grid,i,j).damage
+							ds_grid_set(global.Grid,i,j,tempTile)
+						}
+						catch(error){
+						
+						}
+					}
+				}
+			}
+			else if(ds_grid_get(global.Grid,i,j).type == "Hospital"){
+				for(i2 = -ds_grid_get(global.Grid,i,j).radius ; ds_grid_get(global.Grid,i,j).radius >i2;i2++){
+					for(j2 = -ds_grid_get(global.Grid,i,j).radius ; ds_grid_get(global.Grid,i,j).radius >j2;j2++){
+						try{
+							var tempTile = ds_grid_get(global.Grid,i+i2,j+j2);
+							tempTile.pollution -= ds_grid_get(global.Grid,i,j).damage
+							ds_grid_set(global.Grid,i,j,tempTile)
+						}
+						catch(error){
+						
+						}
+					}
+				}
+			}
+			else{
+				var tempTile = ds_grid_get(global.Grid,i,j);
+				tempTile.pollution = 0;
+				ds_grid_set(global.Grid,i,j,tempTile)
+			}
+		}
+	}
+}
+
 function add_building(_x,_y,_building){
 	if(ds_grid_get(global.Grid,_x,_y).name == global.EmptyBuilding.name){
 		var tempTile = ds_grid_get(global.Grid,_x,_y)
@@ -20,80 +60,20 @@ function add_building(_x,_y,_building){
 	else{
 		return;
 	}
-	
-	switch (_building.type){
-		case "Factory":
-			for(i = -(_building.radius); _building.radius>i;i++){
-				for(j = -(_building.radius); _building.radius>j;j++){
-					try{
-						ds_grid_get(global.Grid,_x+i,_y+j).pollution += _building.damage
-					}
-					catch(error){
-						show_debug_message(error)
-					}
-				}
-			}
-			break;
-		case "Hospital":
-			break;
-		case "Residential":
-			global.Population += _building.citizens
-			break;
-		default:
-			break;
-	}
+	calculatePollution()
 }
 
 function remove_building(_x,_y){
-	switch (ds_grid_get(global.Grid,_x,_y).type){
-		case "Factory":
-			for(i = -ds_grid_get(global.Grid,_x,_y).radius; ds_grid_get(global.Grid,_x,_y).radius>i;i++){
-				for(j = -ds_grid_get(global.Grid,_x,_y).radius; ds_grid_get(global.Grid,_x,_y).radius>j;j++){
-					try{
-						ds_grid_get(global.Grid,_x+i,_y+j).pollution -= ds_grid_get(global.Grid,_x,_y).damage
-					}
-					catch(error){
-						show_debug_message(error)
-					}
-				}
-			}
-			for(i = ds_grid_get(global.Grid,_x,_y).damage; i>0;i--){
-				decrease_damage_building(_x,_y)
-			}
-			break;
-		case "Hospital":
-			break;
-		case "Residential":
-			global.Population -= ds_grid_get(global.Grid,_x,_y).citizens
-			break;
-		default:
-			break;
-	}
-	
 	ds_grid_set(global.Grid,_x,_y,global.EmptyBuilding)
+	calculatePollution()
 }
 
 
 function decrease_damage_building(_x,_y){
-	ds_grid_get(global.Grid,_x,_y).damage = clamp(ds_grid_get(global.Grid,_x,_y).damage-1,0,999)
-	switch (ds_grid_get(global.Grid,_x,_y).type){
-		case "Factory":
-			for(i = ds_grid_get(global.Grid,_x,_y).radius; ds_grid_get(global.Grid,_x,_y).radius>i;i++){
-				for(j = ds_grid_get(global.Grid,_x,_y).radius; ds_grid_get(global.Grid,_x,_y).radius>j;j++){
-					try{
-						ds_grid_get(global.Grid,_x+i,_y+j).pollution = clamp(ds_grid_get(global.Grid,_x+i,_y+j).pollution-1,0,999)
-					}
-					catch(error){
-						show_debug_message(error)
-					}
-				}
-			}
-			break;
-		case "Hospital":
-			break;
-		default:
-			break;
-	}
+	var tempTile = ds_grid_get(global.Grid,_x,_y)
+	tempTile.damage = clamp(ds_grid_get(global.Grid,_x,_y).damage-1,0,999) 
+	ds_grid_set(global.Grid,_x,_y,tempTile)
+	calculatePollution()
 }
 
 function generateGrid() {

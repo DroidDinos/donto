@@ -101,6 +101,20 @@ function decrease_damage_building(_x,_y){
 	calculatePollution()
 }
 
+/// @description Returns true if the grid has at least one building of the given type (e.g. "Hospital", "Factory").
+function HasBuildingType(_type){
+	if (!ds_exists(global.Grid, ds_type_grid)) return false;
+	var gw = ds_grid_width(global.Grid);
+	var gh = ds_grid_height(global.Grid);
+	for (var i = 0; i < gw; i++){
+		for (var j = 0; j < gh; j++){
+			var tile = ds_grid_get(global.Grid, i, j);
+			if (tile.type == _type) return true;
+		}
+	}
+	return false;
+}
+
 function generateGrid() {
 	for (var i = 0; i < ds_grid_width(global.Grid); i++) {
 		for (var j = 0; j < ds_grid_height(global.Grid); j++) {

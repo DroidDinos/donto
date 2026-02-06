@@ -1,3 +1,5 @@
+
+
 function Ticker(){
 	global.Environment = 100
 	for(i = 0; ds_grid_width(global.Grid)>i; i++){

@@ -12,6 +12,15 @@ for(var i = 0; dsw > i; i++){
 function calculatePollution() {
     var grid_w = ds_grid_width(global.Grid);
     var grid_h = ds_grid_height(global.Grid);
+	var modifiers = []
+	
+	array_foreach(global.TemporaryModifiers, function(_value,_index){
+		if(_value.what == "damage"){
+			array_push(modifiers, _value);
+		}
+	})
+	
+	
 	
 	// Reset pollution: give each cell its own struct copy so they don't share one (which made all cells show same pollution)
 	for(var i = 0; i < grid_w; i++){

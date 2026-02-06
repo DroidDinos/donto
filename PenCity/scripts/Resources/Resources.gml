@@ -4,6 +4,9 @@ global.Population = 40
 global.Profit = 0
 global.Months = 0
 global.sinceLastEvent = 0
+global.TemporaryModifiers = [] //array of consequence
+
+
 
 global.Residential = {
 	ApartmanBlock : 1, //1db épület - 3 szint

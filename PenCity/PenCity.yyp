@@ -26,6 +26,7 @@
   "name":"PenCity",
   "resources":[
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
+    {"id":{"name":"Factory","path":"scripts/Factory/Factory.yy",},},
     {"id":{"name":"Resources","path":"scripts/Resources/Resources.yy",},},
   ],
   "resourceType":"GMProject",

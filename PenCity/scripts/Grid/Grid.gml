@@ -13,11 +13,18 @@ function calculatePollution() {
     var grid_w = ds_grid_width(global.Grid);
     var grid_h = ds_grid_height(global.Grid);
 	
+	// Reset pollution: give each cell its own struct copy so they don't share one (which made all cells show same pollution)
 	for(var i = 0; i < grid_w; i++){
 		for(var j = 0; j < grid_h; j++){
-			var tempTile = ds_grid_get(global.Grid,i,j)
-			tempTile.pollution = 0;
-			ds_grid_set(global.Grid,i,j,tempTile)
+			var tempTile = ds_grid_get(global.Grid,i,j);
+			var keys = variable_struct_get_names(tempTile);
+			var copy = {};
+			for (var idx = 0; idx < array_length(keys); idx++) {
+				var k = keys[idx];
+				copy[$ k] = tempTile[$ k];
+			}
+			copy.pollution = 0;
+			ds_grid_set(global.Grid,i,j,copy);
 		}
 	}
     
@@ -27,37 +34,28 @@ function calculatePollution() {
 			//source_tile
             
             if (source_tile.type == "Factory") {
-                var r = source_tile.radius;
-                var r_sq = r * r; // squared distance for integer grid (avoids sqrt)
-                for (var i2 = -r; i2 <= r; i2++) {
-                    for (var j2 = -r; j2 <= r; j2++) {
-                        // Only cells within circular radius (including factory cell)
-                        if (i2 * i2 + j2 * j2 <= r_sq) {
-                            var target_x = i + i2;
-                            var target_y = j + j2;
-                            if (target_x >= 0 && target_x < grid_w && target_y >= 0 && target_y < grid_h) {
-                                var tempTile = ds_grid_get(global.Grid, target_x, target_y);
-                                tempTile.pollution += source_tile.damage;
-                                ds_grid_set(global.Grid, target_x, target_y, tempTile);
-                            }
+                for (var i2 = -source_tile.radius; i2 <= source_tile.radius; i2++) {
+                    for (var j2 = -source_tile.radius; j2 <= source_tile.radius; j2++) {
+                        var target_x = i + i2;
+                        var target_y = j + j2;
+                        if (target_x >= 0 && target_x < grid_w && target_y >= 0 && target_y < grid_h) {
+                            var tempTile = ds_grid_get(global.Grid, target_x, target_y);
+                            tempTile.pollution += source_tile.damage;
+                            ds_grid_set(global.Grid, target_x, target_y, tempTile);
                         }
                     }
                 }
             }
             else if (source_tile.type == "Hospital") {
-                var r = source_tile.radius;
-                var r_sq = r * r;
-                for (var i2 = -r; i2 <= r; i2++) {
-                    for (var j2 = -r; j2 <= r; j2++) {
-                        if (i2 * i2 + j2 * j2 <= r_sq) {
-                            var target_x = i + i2;
-                            var target_y = j + j2;
-                            if (target_x >= 0 && target_x < grid_w && target_y >= 0 && target_y < grid_h) {
-                                var tempTile = ds_grid_get(global.Grid, target_x, target_y);
-                                tempTile.pollution -= source_tile.damage;
-                                if (tempTile.pollution < 0) tempTile.pollution = 0;
-                                ds_grid_set(global.Grid, target_x, target_y, tempTile);
-                            }
+                for (var i2 = -source_tile.radius; i2 <= source_tile.radius; i2++) {
+                    for (var j2 = -source_tile.radius; j2 <= source_tile.radius; j2++) {
+                        var target_x = i + i2;
+                        var target_y = j + j2;
+                        if (target_x >= 0 && target_x < grid_w && target_y >= 0 && target_y < grid_h) {
+                            var tempTile = ds_grid_get(global.Grid, target_x, target_y);
+                            tempTile.pollution -= source_tile.damage;
+                            if (tempTile.pollution < 0) tempTile.pollution = 0;
+                            ds_grid_set(global.Grid, target_x, target_y, tempTile);
                         }
                     }
                 }

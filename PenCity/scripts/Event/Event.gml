@@ -30,39 +30,39 @@ function Event(_type, _title, _description, _choices){
 // ---- Mission pool (add more Event() entries as needed) ----
 function MissionPool(){
 	return [
-		Event("outbreak", "Outbreak", "Residents report illness. The water may be contaminated.",
+		Event("outbreak", "Betegség", "Az orvosok szerint a víz szennyezett.",
 			[
-				Choice("Ignore it.", 0, "", [Consequence("population", -5, 2), Consequence("profit", -3, 2)]),
-				Choice("Distribute bottled water. (Cost: 15)", 15, "", [Consequence("profit", -1, 1)]),
-				Choice("We have a hospital — use it.", 0, "Hospital", [])
+				Choice("Tökéletes állapotú, nem kell aggódni.", 0, "", [Consequence("population", -5, 2), Consequence("profit", -3, 2)]),
+				Choice("Palackos víz kiadás 15 PENcoinért", 15, "", [Consequence("profit", -1, 1)]),
+				Choice("A kórházak elviselik..", 0, "Hospital", [])
 			]
 		),
-		Event("strike", "Labour strike", "Workers demand better conditions.",
+		Event("strike", "Sztrájk", "A munkások panaszkodnak a körülmények miatt.",
 			[
-				Choice("Refuse. Production halts.", 0, "", [Consequence("profit", -8, 3)]),
-				Choice("Pay a one-time settlement. (Cost: 20)", 20, "", []),
-				Choice("Improve facilities. (Cost: 25, requires Hospital)", 25, "Hospital", [Consequence("profit", 2, 4)])
+				Choice("Nem kell aggódni, majd megúnják.", 0, "", [Consequence("profit", -8, 3)]),
+				Choice("Egyszeri bónusz 20 PENcoinért", 20, "", []),
+				//Choice("Improve facilities. (Cost: 25, requires Hospital)", 25, "Hospital", [Consequence("profit", 2, 4)])
 			]
 		),
-		Event("pollution_fine", "Pollution fine", "The council fines the city for excess pollution.",
+		Event("pollution_fine", "Vegánok elégedetlenek", "Úgy gondolják nagy a szennyezettség a városban.",
 			[
-				Choice("Pay the fine. (Cost: 30)", 30, "", []),
-				Choice("Dispute it. Relations sour.", 0, "", [Consequence("pollution", 5, 2), Consequence("profit", -2, 2)]),
-				Choice("Show our green initiatives. (Requires Hospital)", 0, "Hospital", [Consequence("pollution", -3, 2)])
+				Choice("Nincs is gond.", 0, "", []),
+				//Choice("Dispute it. Relations sour.", 0, "", [Consequence("pollution", 5, 2), Consequence("profit", -2, 2)]),
+				Choice("De van kórházunk, az elég ez ellen.", 0, "Hospital", [Consequence("pollution", -3, 2)])
 			]
 		),
-		Event("refugees", "Refugees", "Refugees seek shelter.",
+		//Event("refugees", "Refugees", "Refugees seek shelter.",
+		//	[
+		//		Choice("Turn them away.", 0, "", [Consequence("population", -2, 1)]),
+		//		Choice("Accept them. (Cost: 10)", 10, "", [Consequence("population", 8, 1), Consequence("profit", -1, 2)]),
+		//		Choice("Accept and provide healthcare. (Requires Hospital, Cost: 15)", 15, "Hospital", [Consequence("population", 12, 1)])
+		//	]
+		//),
+		Event("fire", "Gyári katasztrófa", "Az egyik gyárunk nem jól üzemel.",
 			[
-				Choice("Turn them away.", 0, "", [Consequence("population", -2, 1)]),
-				Choice("Accept them. (Cost: 10)", 10, "", [Consequence("population", 8, 1), Consequence("profit", -1, 2)]),
-				Choice("Accept and provide healthcare. (Requires Hospital, Cost: 15)", 15, "Hospital", [Consequence("population", 12, 1)])
-			]
-		),
-		Event("fire", "Factory fire", "A factory caught fire.",
-			[
-				Choice("Let it burn. Rebuild later.", 0, "", [Consequence("profit", -10, 2), Consequence("pollution", 3, 1)]),
-				Choice("Pay for firefighting. (Cost: 20)", 20, "", [Consequence("profit", -2, 1)]),
-				Choice("Use city fire service. (Requires Fire station)", 0, "Fire", [])
+				Choice("Semmit nem tehetünk ez ellen sajnos.", 0, "", [Consequence("profit", -10, 2), Consequence("pollution", 3, 1)]),
+				Choice("Mérnökök megjavítják 20 PENcoinért", 20, "", [Consequence("profit", -2, 1)]),
+				//Choice("Use city fire service. (Requires Fire station)", 0, "Fire", [])
 			]
 		)
 	];

@@ -17,7 +17,9 @@ global.EmptyBuilding = Building("Üres", 0, "Empty");
 
 global.Buildings = {
 	"kicsi_tombhaz" : Building("Kicsi Tömbház", 10, "Residential", spr_Tombhaz1, 5),
-	"kozepes_tombhaz" : Building("Közepes Tömbház", 10, "Residential", spr_Tombhaz2, 10),
-	"nagy_tombhaz" : Building("Nagy Tömbház", 10, "Residential", spr_Tombhaz3, 15),
-	"olajfinomito" : Building("Olajfinomító", 25, "Factory", spr_Tombhaz3, 0, 2, 5, 8) // radius 2, damage 5, profit 8
+	"kozepes_tombhaz" : Building("Közepes Tömbház", 15, "Residential", spr_Tombhaz2, 10),
+	"nagy_tombhaz" : Building("Nagy Tömbház", 25, "Residential", spr_Tombhaz3, 15),
+	"acelonto" : Building("Acélöntő", 25, "Factory", spr_Tombhaz3, 0, 1, 3, 8),
+	"olajfinomito" : Building("Olajfinomító", 25, "Factory", spr_Tombhaz3, 0, 2, 5, 8),
+	
 }

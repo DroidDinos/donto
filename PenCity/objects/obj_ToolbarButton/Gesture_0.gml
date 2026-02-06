@@ -1,1 +1,0 @@
-obj_Toolbar.open = !obj_Toolbar.open

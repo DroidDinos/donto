@@ -1,4 +1,4 @@
-if global.input_consumed then exit
+if global.input_consumed then { return }
 
 if(ds_grid_get(global.Grid,dsx,dsy).name == global.EmptyBuilding.name){
 	add_building(dsx,dsy,global.Buildings.kicsi_tombhaz)

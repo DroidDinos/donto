@@ -1,5 +1,4 @@
 var tap = mouse_check_button_pressed(mb_left)
-global.input_consumed = false
 
 if tap {
 	for (var i = 0; i < array_length(buttons); i++) {

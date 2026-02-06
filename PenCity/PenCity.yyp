@@ -34,6 +34,7 @@
     {"id":{"name":"Resources","path":"scripts/Resources/Resources.yy",},},
     {"id":{"name":"spr_buiilding","path":"sprites/spr_buiilding/spr_buiilding.yy",},},
     {"id":{"name":"spr_Tile","path":"sprites/spr_Tile/spr_Tile.yy",},},
+    {"id":{"name":"spr_Tomb1","path":"sprites/spr_Tomb1/spr_Tomb1.yy",},},
   ],
   "resourceType":"GMProject",
   "resourceVersion":"2.0",

@@ -1,4 +1,4 @@
-global.Environment = 70
+global.Environment = 100
 global.Balance = 50
 global.Population = 40
 global.Profit = 0

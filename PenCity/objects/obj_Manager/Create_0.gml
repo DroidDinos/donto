@@ -1,3 +1,3 @@
 global.input_consumed = false
 
-buttons = [obj_ToolbarButton]
+buttons = [obj_ToolbarButton,obj_Tool]

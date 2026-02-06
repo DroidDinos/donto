@@ -1,3 +1,4 @@
+depth = - 50000
 draw_sprite_ext(
 	sprite,
 	0,

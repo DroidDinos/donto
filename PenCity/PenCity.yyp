@@ -37,6 +37,7 @@
     {"id":{"name":"spr_Tile","path":"sprites/spr_Tile/spr_Tile.yy",},},
     {"id":{"name":"spr_Tomb1","path":"sprites/spr_Tomb1/spr_Tomb1.yy",},},
     {"id":{"name":"spr_Tomb2","path":"sprites/spr_Tomb2/spr_Tomb2.yy",},},
+    {"id":{"name":"spr_Tomb3","path":"sprites/spr_Tomb3/spr_Tomb3.yy",},},
   ],
   "resourceType":"GMProject",
   "resourceVersion":"2.0",

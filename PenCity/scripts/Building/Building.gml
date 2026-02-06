@@ -17,5 +17,5 @@ global.EmptyBuilding = Building("Üres",0,"Empty")
 global.Buildings = {
 	"kicsi_tombhaz" : Building("Kicsi Tömbház", 10, "Residential", spr_Tomb1, 5),
 	"kozepes_tombhaz" : Building("Közepes Tömbház", 10, "Residential", spr_Tomb2, 10),
-	"nagy_tombhaz" : Building("Nagy Tömbház", 10, "Residential", spr_Tomb1, 15)
+	"nagy_tombhaz" : Building("Nagy Tömbház", 10, "Residential", spr_Tomb3, 15)
 }

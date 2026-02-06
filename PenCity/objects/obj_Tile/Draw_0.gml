@@ -7,4 +7,5 @@ if building.sprite != noone {
 }
 
 draw_set_colour(c_black)
-draw_text(x,y,dsx)
+var text = string_concat(dsx, ", ", dsy)
+draw_text(x + 128 - string_width(text)/2, y + 128 - string_height(text)/2, text)

@@ -40,6 +40,7 @@
     {"id":{"name":"Ticker","path":"scripts/Ticker/Ticker.yy",},},
     {"id":{"name":"clouds","path":"sprites/clouds/clouds.yy",},},
     {"id":{"name":"spr_buiilding","path":"sprites/spr_buiilding/spr_buiilding.yy",},},
+    {"id":{"name":"spr_Coin","path":"sprites/spr_Coin/spr_Coin.yy",},},
     {"id":{"name":"spr_Tile","path":"sprites/spr_Tile/spr_Tile.yy",},},
     {"id":{"name":"spr_Tombhaz1","path":"sprites/spr_Tombhaz1/spr_Tombhaz1.yy",},},
     {"id":{"name":"spr_Tombhaz2","path":"sprites/spr_Tombhaz2/spr_Tombhaz2.yy",},},

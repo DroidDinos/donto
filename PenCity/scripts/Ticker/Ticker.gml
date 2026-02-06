@@ -7,18 +7,18 @@ function Ticker(){
 	}
 }
 
-global.Ticker = function(){
-	global.Environment = 100 - (global.Residential.ApartmanBlock*clamp(10-global.Residential.Filtration,0,10))
-	global.Environment = global.Environment-(Damage*clamp(10-global.Factory.Filtration,0,10))
-	global.Environment = global.Environment-(global.Public.Power*10)
-	global.Environment = global.Environment-(global.Public.Trafic*10)
+//global.Ticker = function(){
+//	global.Environment = 100 - (global.Residential.ApartmanBlock*clamp(10-global.Residential.Filtration,0,10))
+//	global.Environment = global.Environment-(Damage*clamp(10-global.Factory.Filtration,0,10))
+//	global.Environment = global.Environment-(global.Public.Power*10)
+//	global.Environment = global.Environment-(global.Public.Trafic*10)
 	
-	global.Population = 30+(global.Residential.ApartmanBlock*10)
+//	global.Population = 30+(global.Residential.ApartmanBlock*10)
 	
-	global.Profit = 0;
-	array_foreach(global.Factory.Factories, function(_element, _index){
-		global.Profit += _element.profit
-	})
+//	global.Profit = 0;
+//	array_foreach(global.Factory.Factories, function(_element, _index){
+//		global.Profit += _element.profit
+//	})
 	
-	global.Balance += global.Profit
-}
+//	global.Balance += global.Profit
+//}

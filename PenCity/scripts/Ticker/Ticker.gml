@@ -1,4 +1,4 @@
-
+global.input_consumed = false
 
 function Ticker(){
 	global.Environment = 100

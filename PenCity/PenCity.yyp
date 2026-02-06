@@ -27,6 +27,7 @@
   "resources":[
     {"id":{"name":"obj_Camera","path":"objects/obj_Camera/obj_Camera.yy",},},
     {"id":{"name":"obj_Manager","path":"objects/obj_Manager/obj_Manager.yy",},},
+    {"id":{"name":"obj_StatDisplay","path":"objects/obj_StatDisplay/obj_StatDisplay.yy",},},
     {"id":{"name":"obj_tester","path":"objects/obj_tester/obj_tester.yy",},},
     {"id":{"name":"obj_Tile","path":"objects/obj_Tile/obj_Tile.yy",},},
     {"id":{"name":"obj_Toolbar","path":"objects/obj_Toolbar/obj_Toolbar.yy",},},
@@ -41,6 +42,7 @@
     {"id":{"name":"clouds","path":"sprites/clouds/clouds.yy",},},
     {"id":{"name":"spr_buiilding","path":"sprites/spr_buiilding/spr_buiilding.yy",},},
     {"id":{"name":"spr_Coin","path":"sprites/spr_Coin/spr_Coin.yy",},},
+    {"id":{"name":"spr_Square","path":"sprites/spr_Square/spr_Square.yy",},},
     {"id":{"name":"spr_Tile","path":"sprites/spr_Tile/spr_Tile.yy",},},
     {"id":{"name":"spr_Tombhaz1","path":"sprites/spr_Tombhaz1/spr_Tombhaz1.yy",},},
     {"id":{"name":"spr_Tombhaz2","path":"sprites/spr_Tombhaz2/spr_Tombhaz2.yy",},},

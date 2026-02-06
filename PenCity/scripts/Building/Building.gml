@@ -1,4 +1,4 @@
-function Building(_name,_cost,_type,_radius, _damage = 0, _pollution = 0){
+function Building(_name,_cost,_type,_radius = 0, _damage = 0, _pollution = 0){
 	return {
 		name : _name,
 		cost : _cost,
@@ -10,4 +10,8 @@ function Building(_name,_cost,_type,_radius, _damage = 0, _pollution = 0){
 	}
 }
 
-global.EmptyBuilding = Building("Empty",0,"Empty",0)
+global.EmptyBuilding = Building("Üres",0,"Empty")
+
+global.Buildings = {
+	"Kicsi Tömbház" : Building("Kicsi Tömbház", 10, "Residential") 
+}

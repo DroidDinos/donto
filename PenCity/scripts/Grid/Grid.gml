@@ -13,6 +13,7 @@ function add_building(_x,_y,_building){
 	if(ds_grid_get(global.Grid,_x,_y).name == global.EmptyBuilding.name){
 		ds_grid_get(global.Grid,_x,_y).name = _building.name;
 		ds_grid_get(global.Grid,_x,_y).cost = _building.cost;
+		ds_grid_get(global.Grid,_x,_y).sprite = _building.sprite;
 		ds_grid_get(global.Grid,_x,_y).type = _building.type;
 		ds_grid_get(global.Grid,_x,_y).radius = _building.radius;
 		ds_grid_get(global.Grid,_x,_y).damage = _building.damage;
@@ -56,7 +57,7 @@ function decrease_damage_building(_x,_y){
 function generateGrid() {
 	for (var i = 0; i < ds_grid_width(global.Grid); i++) {
 		for (var j = 0; j < ds_grid_height(global.Grid); j++) {
-			instance_create_layer(1312 + i*128 - j*128, j*64 + i*64 + room_height/2 - ds_grid_height(global.Grid)*128/2, layer_get_id("Tiles"),obj_Tile)
+			instance_create_layer(1312 + i*128 - j*128, j*64 + i*64 + room_height/2 - ds_grid_height(global.Grid)*128/2, layer_get_id("Tiles"),obj_Tile,{dsx : i, dsy : j})
 		}
 	}
 }

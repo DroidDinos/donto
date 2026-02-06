@@ -3,7 +3,21 @@ function Ticker(){
 	// 1) Advance month
 	global.Months++;
 
-	// 2) Apply temporary modifiers and decay (apply effect this month, then decrease monthsLeft)
+	// 2) Environment = 100 minus total pollution from the grid (factory buildings)
+	calculatePollution();
+	var totalPollution = 0;
+	if (ds_exists(global.Grid, ds_type_grid)) {
+		for (var ii = 0; ii < ds_grid_width(global.Grid); ii++) {
+			for (var jj = 0; jj < ds_grid_height(global.Grid); jj++) {
+				var cell = ds_grid_get(global.Grid, ii, jj);
+				if (variable_struct_exists(cell, "pollution"))
+					totalPollution += cell.pollution;
+			}
+		}
+	}
+	global.Environment = clamp(100 - totalPollution, 0, 100);
+
+	// 3) Apply temporary modifiers and decay (apply effect this month, then decrease monthsLeft)
 	var i = array_length(global.TemporaryModifiers) - 1;
 	while (i >= 0) {
 		var m = global.TemporaryModifiers[i];
@@ -20,22 +34,20 @@ function Ticker(){
 		}
 		i--;
 	}
+	global.Environment = clamp(global.Environment, 0, 100);
 
-	// 3) Environment from grid damage
-	global.Environment = 100;
+	// 4) Monthly profit from buildings (e.g. factories) and add to balance
+	global.Profit = 0;
 	if (ds_exists(global.Grid, ds_type_grid)) {
 		for (var ii = 0; ii < ds_grid_width(global.Grid); ii++) {
 			for (var jj = 0; jj < ds_grid_height(global.Grid); jj++) {
 				var cell = ds_grid_get(global.Grid, ii, jj);
-				if (variable_struct_exists(cell, "damage"))
-					global.Environment -= cell.damage;
+				if (variable_struct_exists(cell, "profit") && cell.profit > 0)
+					global.Profit += cell.profit;
 			}
 		}
 	}
-	global.Environment = clamp(global.Environment, 0, 100);
-
-	// 4) Apply profit to balance (optional: uncomment if you want monthly profit to add to balance)
-	// global.Balance += global.Profit;
+	global.Balance += global.Profit;
 
 	// 5) Mission generation: at least one event every 8 months, can trigger 2–8 months after last
 	if (global.currentMission == undefined || global.currentMission == null) {

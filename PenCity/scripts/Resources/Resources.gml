@@ -9,25 +9,4 @@ global.currentMission = undefined // set by Ticker when an event triggers; clear
 
 
 
-global.Residential = {
-	ApartmanBlock : 1, //1db épület - 3 szint
-	Insulation : 0,
-	Filtration : 0
-}
-
-global.Factory = {
-	Factories : [], //factory array
-	Filtration : 0,
-	Damage : 0
-}
-
-global.Public = {
-	Healthcare : 0,
-	Police : 0,
-	Fire : 0,
-	Trafic : 1,
-	Power : 1
-}
-
-
 

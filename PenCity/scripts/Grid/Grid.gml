@@ -11,12 +11,10 @@ for(var i = 0; dsw > i; i++){
 
 function add_building(_x,_y,_building){
 	if(ds_grid_get(global.Grid,_x,_y).name == global.EmptyBuilding.name){
-		ds_grid_get(global.Grid,_x,_y).name = _building.name;
-		ds_grid_get(global.Grid,_x,_y).cost = _building.cost;
-		ds_grid_get(global.Grid,_x,_y).sprite = _building.sprite;
-		ds_grid_get(global.Grid,_x,_y).type = _building.type;
-		ds_grid_get(global.Grid,_x,_y).radius = _building.radius;
-		ds_grid_get(global.Grid,_x,_y).damage = _building.damage;
+		var tempTile = ds_grid_get(global.Grid,_x,_y)
+		ds_grid_set(global.Grid,_x,_y,_building)
+		ds_grid_get(global.Grid,_x,_y).pollution = tempTile.pollution
+		ds_grid_get(global.Grid,_x,_y).damage = tempTile.damage
 	}
 	else{
 		return;

@@ -25,7 +25,12 @@ function add_building(_x,_y,_building){
 		case "Factory":
 			for(i = -(_building.radius); _building.radius>i;i++){
 				for(j = -(_building.radius); _building.radius>j;j++){
-					ds_grid_get(global.Grid,_x+i,_y+j).pollution += _building.damage
+					try{
+						ds_grid_get(global.Grid,_x+i,_y+j).pollution += _building.damage
+					}
+					catch(error){
+						show_debug_message(error)
+					}
 				}
 			}
 			break;
@@ -44,7 +49,12 @@ function remove_building(_x,_y){
 		case "Factory":
 			for(i = -ds_grid_get(global.Grid,_x,_y).radius; ds_grid_get(global.Grid,_x,_y).radius>i;i++){
 				for(j = -ds_grid_get(global.Grid,_x,_y).radius; ds_grid_get(global.Grid,_x,_y).radius>j;j++){
-					ds_grid_get(global.Grid,_x+i,_y+j).pollution -= ds_grid_get(global.Grid,_x,_y).damage
+					try{
+						ds_grid_get(global.Grid,_x+i,_y+j).pollution -= ds_grid_get(global.Grid,_x,_y).damage
+					}
+					catch(error){
+						show_debug_message(error)
+					}
 				}
 			}
 			for(i = ds_grid_get(global.Grid,_x,_y).damage; i>0;i--){
@@ -70,7 +80,12 @@ function decrease_damage_building(_x,_y){
 		case "Factory":
 			for(i = ds_grid_get(global.Grid,_x,_y).radius; ds_grid_get(global.Grid,_x,_y).radius>i;i++){
 				for(j = ds_grid_get(global.Grid,_x,_y).radius; ds_grid_get(global.Grid,_x,_y).radius>j;j++){
-					ds_grid_get(global.Grid,_x+i,_y+j).pollution = clamp(ds_grid_get(global.Grid,_x+i,_y+j).pollution-1,0,999)
+					try{
+						ds_grid_get(global.Grid,_x+i,_y+j).pollution = clamp(ds_grid_get(global.Grid,_x+i,_y+j).pollution-1,0,999)
+					}
+					catch(error){
+						show_debug_message(error)
+					}
 				}
 			}
 			break;

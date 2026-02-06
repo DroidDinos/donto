@@ -1,14 +1,14 @@
 draw_self()
-image_blend = c_white
+tempColor = c_white
 
 var building = ds_grid_get(global.Grid,dsx,dsy)
 
 if building.pollution > 0{
-	image_blend = c_lime
+	tempColor = c_lime
 }
 
 if building.sprite != noone {
-	draw_sprite(building.sprite, 0, x, y+192)
+	draw_sprite_ext(building.sprite, 0, x, y+192,1,1,0,tempColor,0.5)
 }
 
 

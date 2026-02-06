@@ -9,44 +9,64 @@ for(var i = 0; dsw > i; i++){
 	}
 }
 
-function calculatePollution(){
-	for(i = 0; ds_grid_width(global.Grid) > i;i++){
-		for (j = 0; ds_grid_height(global.Grid) > j; j++){
-			if(ds_grid_get(global.Grid,i,j).type == "Factory"){
-				for(i2 = -ds_grid_get(global.Grid,i,j).radius ; ds_grid_get(global.Grid,i,j).radius >i2;i2++){
-					for(j2 = -ds_grid_get(global.Grid,i,j).radius ; ds_grid_get(global.Grid,i,j).radius >j2;j2++){						
-						try{
-							var tempTile = ds_grid_get(global.Grid,i+i2,j+j2);
-							tempTile.pollution += ds_grid_get(global.Grid,i,j).damage
-							ds_grid_set(global.Grid,i,j,tempTile)
-						}
-						catch(error){
-						
-						}
-					}
-				}
-			}
-			else if(ds_grid_get(global.Grid,i,j).type == "Hospital"){
-				for(i2 = -ds_grid_get(global.Grid,i,j).radius ; ds_grid_get(global.Grid,i,j).radius >i2;i2++){
-					for(j2 = -ds_grid_get(global.Grid,i,j).radius ; ds_grid_get(global.Grid,i,j).radius >j2;j2++){
-						try{
-							var tempTile = ds_grid_get(global.Grid,i+i2,j+j2);
-							tempTile.pollution -= ds_grid_get(global.Grid,i,j).damage
-							ds_grid_set(global.Grid,i,j,tempTile)
-						}
-						catch(error){
-						
-						}
-					}
-				}
-			}
-			else{
-				var tempTile = ds_grid_get(global.Grid,i,j);
-				tempTile.pollution = 0;
-				ds_grid_set(global.Grid,i,j,tempTile)
-			}
+function calculatePollution() {
+    var grid_w = ds_grid_width(global.Grid);
+    var grid_h = ds_grid_height(global.Grid);
+	
+	for(var i = 0; i < grid_w; i++){
+		for(var j = 0; j < grid_h; j++){
+			var tempTile = ds_grid_get(global.Grid,i,j)
+			tempTile.pollution = 0;
+			ds_grid_set(global.Grid,i,j,tempTile)
 		}
 	}
+    
+    for (var i = 0; i < grid_w; i++) {
+        for (var j = 0; j < grid_h; j++) {
+            var source_tile = ds_grid_get(global.Grid, i, j);
+			//source_tile
+            
+            if (source_tile.type == "Factory") {
+                var r = source_tile.radius;
+                var r_sq = r * r; // squared distance for integer grid (avoids sqrt)
+                for (var i2 = -r; i2 <= r; i2++) {
+                    for (var j2 = -r; j2 <= r; j2++) {
+                        // Only cells within circular radius (including factory cell)
+                        if (i2 * i2 + j2 * j2 <= r_sq) {
+                            var target_x = i + i2;
+                            var target_y = j + j2;
+                            if (target_x >= 0 && target_x < grid_w && target_y >= 0 && target_y < grid_h) {
+                                var tempTile = ds_grid_get(global.Grid, target_x, target_y);
+                                tempTile.pollution += source_tile.damage;
+                                ds_grid_set(global.Grid, target_x, target_y, tempTile);
+                            }
+                        }
+                    }
+                }
+            }
+            else if (source_tile.type == "Hospital") {
+                var r = source_tile.radius;
+                var r_sq = r * r;
+                for (var i2 = -r; i2 <= r; i2++) {
+                    for (var j2 = -r; j2 <= r; j2++) {
+                        if (i2 * i2 + j2 * j2 <= r_sq) {
+                            var target_x = i + i2;
+                            var target_y = j + j2;
+                            if (target_x >= 0 && target_x < grid_w && target_y >= 0 && target_y < grid_h) {
+                                var tempTile = ds_grid_get(global.Grid, target_x, target_y);
+                                tempTile.pollution -= source_tile.damage;
+                                if (tempTile.pollution < 0) tempTile.pollution = 0;
+                                ds_grid_set(global.Grid, target_x, target_y, tempTile);
+                            }
+                        }
+                    }
+                }
+            }
+            else {                
+                ds_grid_set(global.Grid, i, j, source_tile);
+            }
+        }
+    }
 }
 
 function add_building(_x,_y,_building){
